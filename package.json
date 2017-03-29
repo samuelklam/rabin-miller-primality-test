@@ -1,0 +1,22 @@
+{
+  "name": "rabin-miller-primality-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "rabin-miller.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/samuelklam/rabin-miller-primality-test.git"
+  },
+  "author": "Samuel <sam@samuelklam.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/samuelklam/rabin-miller-primality-test/issues"
+  },
+  "homepage": "https://github.com/samuelklam/rabin-miller-primality-test",
+  "dependencies": {
+    "big-integer": "^1.6.17"
+  }
+}
