@@ -1,6 +1,10 @@
 /*
- * Function for modular exponentiation, computes (base^expo) mod n
- * Ensures against integer overflow
+ * Function for modular exponentiation (ensures against integer overflow),
+ * computes (base^expo) mod n
+ * @param base : used as base
+ * @param expo : used as expo
+ * @param n : used to mod
+ * @return val : val = ((base^expo) mod n)
  */
 function modularExponentiation(base, expo, n) {
     let val = 1;
@@ -11,9 +15,9 @@ function modularExponentiation(base, expo, n) {
         }
         // repeated squaring
         base = (base * base) % n;
-        expo /= 2;
+        expo = Math.floor(expo / 2);
     }
-    return val;
+    return val % n;
 }
 
  /*
@@ -23,26 +27,25 @@ function modularExponentiation(base, expo, n) {
   * @return bool : if prime True else False
   */
  function RabinMillerTest(n, u) {
-    // pick random integer 2 <= a < p
-    let a = Math.floor(Math.random() * (n-1)) + 2;
+    // pick random integer 2 <= a < n
+    let a = Math.floor(Math.random() * (n-2)) + 2;
+    let expo = u;
+    let val;
 
-    let result = modularExponentiation(a, u, n);
-
-    if (result === 1 || result === n-1) return true;
-
-    while (u !== n-1) {
-        result = (result * result) % n;
-        u *= 2;
-        if (result === 1) {
-            console.log('A value:', a, 'Expo value:', u);
+    while (expo !== n-1) {
+        val = modularExponentiation(a, expo, n);
+        if (val !== 1 && val !== n-1) {
+            console.log(a, u, expo);
             return false;
         }
-        if (result === n-1) {
-            return true;
-        }
+        expo *= 2;
     }
-    console.log('A value:', a, ', Expo value:', u);
-    return false;
+    val = modularExponentiation(a, expo, n);
+    if (val !== 1) {
+        console.log(a, u, expo);
+        return false;
+    }
+    return true;
  }
 
 /*
@@ -58,7 +61,7 @@ function isPrime(n, numTrials) {
     // compute u, s.t. n-1 = (2^t)u
     let u = n - 1;
     while (u % 2 === 0) {
-        u /= 2;
+        u = Math.floor(u / 2);
     }
 
     // run trials
@@ -70,4 +73,4 @@ function isPrime(n, numTrials) {
     return true;
 }
 
-isPrime(636127, 10);
+isPrime(294409, 100);
