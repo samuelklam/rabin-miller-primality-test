@@ -1,6 +1,7 @@
 from random import randrange
 import math
 
+
 def mod_e(base, expo, n):
     val1 = 1
     while expo > 0:
@@ -32,7 +33,6 @@ def probably_prime(n, k):
         r += 1
         s //= 2
         print s
-    print r
     for _ in range(k):
         a = randrange(2, n - 1)
         x = mod_e(a, s, n)

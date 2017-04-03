@@ -4,12 +4,12 @@
  * @param base : used as base
  * @param expo : used as expo
  * @param n : used to mod
- * @return val : val = ((base^expo) mod n)
+ * @return result : result = ((base^expo) mod n)
  */
 function modularExponentiation(base, expo, n) {
     let val = 1;
     while (expo > 0) {
-        // the case that expo is odd, make sure to multiply by 1 base
+        // the case that expo is odd, make sure to multiply by one base
         if (expo % 2 === 1) {
             val = (val * base) % n;
         }
@@ -17,7 +17,7 @@ function modularExponentiation(base, expo, n) {
         base = (base * base) % n;
         expo = Math.floor(expo / 2);
     }
-    return val % n;
+    return val;
 }
 
  /*
@@ -73,4 +73,6 @@ function isPrime(n, numTrials) {
     return true;
 }
 
-isPrime(294409, 100);
+let n = 294409;
+let numTrials = 100;
+isPrime(n, numTrials);
