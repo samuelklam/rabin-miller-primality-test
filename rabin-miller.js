@@ -23,26 +23,26 @@ function modularExponentiation(base, expo, n) {
  /*
   * Function implements Rabin Miller Primality Test
   * @param n : number to test for primality
-  * @param u : denotes u in the equation (n-1 = (2^t)u)
+  * @param u : denotes u in the equation (n-1 = (2^t) * u)
   * @return bool : if prime True else False
   */
  function RabinMillerTest(n, u) {
     // pick random integer 2 <= a < n
-    let a = Math.floor(Math.random() * (n-2)) + 2;
-    let expo = u;
-    let val;
+    let a = Math.floor(Math.random() * (n - 2)) + 2;
+    let expo = u, prev = false, val;
 
     while (expo !== n-1) {
         val = modularExponentiation(a, expo, n);
-        if (val !== 1 && val !== n-1) {
-            console.log(a, u, expo);
+        if (prev && (val === 1 % n)) {
+            console.log("Witness, u, expo:", a, u, expo);
             return false;
         }
+        prev = (val !== 1 && val !== n-1) ? true : false;
         expo *= 2;
     }
     val = modularExponentiation(a, expo, n);
     if (val !== 1) {
-        console.log(a, u, expo);
+        console.log("Witness, u, expo:", a, u, expo);
         return false;
     }
     return true;
@@ -73,6 +73,7 @@ function isPrime(n, numTrials) {
     return true;
 }
 
-let n = 294409;
+
 let numTrials = 100;
-isPrime(n, numTrials);
+console.log(isPrime(294409, numTrials));
+console.log(isPrime(636127, numTrials));
